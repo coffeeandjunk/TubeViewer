@@ -24,12 +24,14 @@ def job():
         current_video = sample(videos, 1)[0]
         print("Viewing ", current_video)
         driver.get(current_video)
+        driver.find_element_by_tag_name('body').send_keys(Keys.COMMAND + 'r')
+        duration = driver.find_element_by_class_name('ytp-time-duration').text
+        print(duration)
 
         while(view < randint(1, 5)):
             time.sleep(5)
             view = view + 1
             print(view, " view(s)")
-            driver.find_element_by_tag_name('body').send_keys(Keys.COMMAND + 'r')
 
     finally:
         print("Sleeping...")
