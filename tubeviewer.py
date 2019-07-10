@@ -9,9 +9,9 @@ chromedriver = './drivers/chromedriver'
 options = webdriver.ChromeOptions()
 options.add_argument('headless')
 
-# driver = webdriver.Chrome(executable_path=chromedriver, chrome_options=options)
+driver = webdriver.Chrome(executable_path=chromedriver, chrome_options=options)
 
-driver = webdriver.Chrome("./drivers/chromedriver")
+# driver = webdriver.Chrome("./drivers/chromedriver")
 driver.implicitly_wait(10)
 # driver.maximize_window()
 
@@ -45,13 +45,13 @@ def job():
     finally:
         driver.find_element_by_id('logo-icon-container').click()
         print("Went to YouTube home screen. Now sleeping...")
-        time.sleep(5)
-        # time.sleep(randint(10, 25))
+        # time.sleep(5)
+        time.sleep(randint(120, 240))
         print("TubeViewer is awake")
         # driver.quit()
 
-# schedule.every(randint(7, 17)).minutes.do(job)
-schedule.every(5).seconds.do(job)
+schedule.every(randint(5, 10)).minutes.do(job)
+# schedule.every(5).seconds.do(job)
 
 while True:
     schedule.run_pending()
