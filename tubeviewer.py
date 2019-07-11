@@ -1,5 +1,6 @@
 import schedule
 import time
+import datetime
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from random import randint, sample
@@ -17,11 +18,13 @@ def job():
 
         driver = webdriver.Chrome(executable_path=chromedriver, options=options)
         driver.implicitly_wait(10)
-        print("TubeViewer has started")
+        current_time = datetime.datetime.now().strftime("%X")
+        print("[",current_time,"]", " TubeViewer has started")
 
         current_video = sample(videos, 1)[0]
         driver.get(current_video)
-        print("Viewing: ", current_video)
+        current_time = datetime.datetime.now().strftime("%X")
+        print("[",current_time,"]", "Viewing: ", current_video)
 
         driver.implicitly_wait(10)
         yt_duration = driver.find_element_by_class_name('ytp-time-duration').text
@@ -54,7 +57,8 @@ def job():
         # time.sleep(10)
 
     finally:
-        print("TubeViewer has quit.")
+        current_time = datetime.datetime.now().strftime("%X")
+        print("[",current_time,"]", "TubeViewer has quit.")
         driver.quit()
 
 schedule.every(randint(5, 10)).minutes.do(job)
