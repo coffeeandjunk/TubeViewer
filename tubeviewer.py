@@ -11,6 +11,9 @@ def job():
         chromedriver = './drivers/chromedriver'
         options = webdriver.ChromeOptions()
         options.add_argument('headless')
+        # options.add_argument('--ignore-certificate-errors')
+        # options.add_argument('--test-type')
+        # options.binary_location = "/usr/bin/chromium"
 
         driver = webdriver.Chrome(executable_path=chromedriver, options=options)
         driver.implicitly_wait(10)
@@ -30,19 +33,31 @@ def job():
         duration = (int(minutes) * 60) + int(seconds)
         print("Duration: ", duration, " secs")
 
+        yt_play_btn = driver.find_element_by_class_name('ytp-play-button')
+        yt_play_btn.click()
+        ytp_mute_btn = driver.find_element_by_class_name('ytp-mute-button')
+        ytp_mute_btn.click()
+
+        # time.sleep(10)
+        # driver.save_screenshot("screenshot1.png")
+        # time.sleep(20)
+        # driver.save_screenshot("screenshot2.png")
+        # time.sleep(30)
+        # driver.save_screenshot("screenshot3.png")
+
         time.sleep(duration)
         # time.sleep(10)
 
-        driver.find_element_by_id('logo-icon-container').click()
-        print("Went to YouTube home screen.")
-        time.sleep(randint(120, 240))
+        # driver.find_element_by_id('logo-icon-container').click()
+        # print("Went to YouTube home screen.")
+        # time.sleep(randint(120, 240))
         # time.sleep(10)
 
     finally:
         print("TubeViewer has quit.")
         driver.quit()
 
-schedule.every(randint(15, 30)).minutes.do(job)
+schedule.every(randint(5, 10)).minutes.do(job)
 # schedule.every(10).seconds.do(job)
 
 while True:
