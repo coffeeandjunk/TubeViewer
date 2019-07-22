@@ -1,10 +1,18 @@
 import schedule
 import time
 import datetime
+import sys
+import subprocess
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from random import randint, sample
 from videos import videos
+
+import sys
+import subprocess
+
+if 'darwin' in sys.platform:
+    subprocess.Popen('caffeinate')
 
 def job():
 
@@ -61,7 +69,7 @@ def job():
         print("[",current_time,"]", "TubeViewer has quit.")
         driver.quit()
 
-schedule.every(randint(5, 10)).minutes.do(job)
+schedule.every(randint(3, 7)).minutes.do(job)
 # schedule.every(10).seconds.do(job)
 
 while True:
